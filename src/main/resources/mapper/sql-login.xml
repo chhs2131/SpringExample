@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.ac.inha.board.login.mapper.LoginMapper">
+	<select id="selectMembers" parameterType="String" resultType="kr.ac.inha.board.login.dto.MembersDto">
+		SELECT user_no,
+			   user_id,
+			   user_pass,
+			   first_name,
+			   last_name,
+			   role_name, 
+			   enabled, 
+			   DATE_FORMAT(regist_date, '%Y-%m-%d') regist_date, 
+			   DATE_FORMAT(certification_date, '%Y-%m-%d') certification_date
+		  FROM members
+		 WHERE user_id = #{userId}
+	</select>
+
+	<insert id="insertMembers" parameterType="kr.ac.inha.board.login.dto.MembersDto">
+		 INSERT INTO members
+				  (user_id, user_pass, first_name, last_name, role_name, enabled, regist_date, certification_date)
+			VALUES (#{userId},
+			        #{userPass},
+			        #{firstName},
+			        #{lastName},
+			        'USER',
+			        'N',
+			        NOW(),
+			        null)
+	</insert>
+	
+	<update id="updateMembersCert" parameterType="kr.ac.inha.board.login.dto.MembersDto">
+		 UPDATE members
+		    SET enabled = 'Y',
+		    	certification_date = NOW()
+		  WHERE user_id = #{userId}
+	</update>
+</mapper>

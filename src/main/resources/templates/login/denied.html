@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" 
+	xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security" 
+	layout:decorator="layout/default_layout">
+
+<head>
+	<title>인해대학교</title>
+</head>
+
+<body id="page-top">
+	<div class="container-fluid" layout:fragment="content">
+		<br>
+		<br>
+		<h3 style="text-align:center">인증이 실패하였습니다.</h3>
+		<br>
+		<h5 style="text-align:center;color:red" th:text="${errMsg}">...</h5>
+		<br>
+	</div>
+	<!-- /.container-fluid -->
+
+	<th:block layout:fragment="script">
+	</th:block>
+</body>
+
+</html>
