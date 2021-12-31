@@ -36,6 +36,20 @@ public class KakaoController {
 		String returnValue = kakaoLoginService.getKakaoUid(token);
 		return returnValue;
 	}
+
+	@RequestMapping(value="/login/kakao2", method=RequestMethod.GET)
+	@ResponseBody
+	public String kakaoLogin2(String code) throws Exception {
+		String returnValue = kakaoLoginService.getTest(code);
+		return returnValue;
+	}
+	
+	@RequestMapping(value="/login/ttt", method=RequestMethod.GET)
+	@ResponseBody
+	public String kakaoLogin3(String code) throws Exception {
+		String returnValue = kakaoLoginService.testTest(code);
+		return returnValue;
+	}
 	
 	@RequestMapping(value="/login/kakaoUid", method=RequestMethod.GET)
 	@ResponseBody

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import kr.ac.inha.board.common.HttpConnection;
 import kr.ac.inha.board.login.dto.KakaoApiUserDto;
 import kr.ac.inha.board.login.dto.KakaoOAuthDto;
 
@@ -18,6 +19,7 @@ import kr.ac.inha.board.login.dto.KakaoOAuthDto;
 public class KakaoLoginServiceImpl implements KakaoLoginService {
 	String kakaoRestKey = "a130d4bc5b0df2dd600ac87ffdda755a";
 	String redirectUri = "http://1.243.131.200:8080/login/kakao";
+    HttpConnection httpConnection = new HttpConnection();
 	
 	public String getFirstToken(String authCode) throws Exception {
 		// 변수초기화
@@ -53,6 +55,39 @@ public class KakaoLoginServiceImpl implements KakaoLoginService {
 		//return "AuthCode : " + authCode + " <br/><br/> JsonData : " + result + " <br/> JsonToDto : " + kakaoOAuthDto + " <br/><br/> accessToken is : " + accessToken;
 		return accessToken;
 	}
+	
+
+	public String testTest(String authCode) throws Exception {
+		//String newResult = httpConnection.getMethod("http://127.0.0.1:8080/api/psw");
+		String newResult = httpConnection.getMethod("https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=a130d4bc5b0df2dd600ac87ffdda755a&redirect_uri=http://1.243.131.200:8080/login/ttt&code="+authCode);
+		return newResult;
+	}
+	
+
+	public String getTest(String authCode) throws Exception {
+		// 변수초기화
+        ObjectMapper objectMapper = new ObjectMapper();
+        KakaoOAuthDto kakaoOAuthDto = new KakaoOAuthDto();
+        String accessToken = "no_data";
+        
+        String apiUrl = "https://kauth.kakao.com/oauth/token?" + 
+                    "grant_type=authorization_code&" + 
+                    "client_id=" + kakaoRestKey + 
+                    "&redirect_uri=" + redirectUri + 
+                    "&code=" + authCode;
+
+        String newResult = httpConnection.getMethod(apiUrl);
+        System.out.println(newResult);
+
+        kakaoOAuthDto = objectMapper.readValue(newResult, KakaoOAuthDto.class);
+        accessToken = kakaoOAuthDto.getAccessToken();
+
+		return accessToken;
+	}
+	
+	
+	
+	
 	
 	public String getKakaoUid(String accessToken) throws Exception {     
 		// 변수 초기화
