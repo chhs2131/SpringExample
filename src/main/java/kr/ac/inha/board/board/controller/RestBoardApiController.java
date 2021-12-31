@@ -11,10 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import kr.ac.inha.board.board.dto.BoardDto;
 import kr.ac.inha.board.board.service.BoardService;
 
 @RestController
+@Api(tags = {"board test"})
 public class RestBoardApiController {
 	Logger log = LoggerFactory.getLogger(this.getClass());
 	

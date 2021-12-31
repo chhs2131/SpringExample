@@ -14,12 +14,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import kr.ac.inha.board.ipo.dto.IpoDto;
 import kr.ac.inha.board.ipo.dto.PswDto;
 import kr.ac.inha.board.ipo.service.IpoService;
 import kr.ac.inha.board.ipo.service.SystemLogService;
 
 @RestController
+@Api(value = "IpoController", description = "기업공개 관련 API")
 public class IpoApiController {
 	Logger log = LoggerFactory.getLogger(this.getClass());
 	
@@ -39,8 +44,9 @@ public class IpoApiController {
 	}
 	
 	@RequestMapping(value="/api/ipo/{ipoIndex}", method=RequestMethod.GET)
+	@ApiOperation(value="기업공개 정보 조회", notes="Index번호를 기준으로 기업공개 정보를 조회하여 반환.")
 	public IpoDto openApiIpoDetail(@PathVariable("ipoIndex") int ipoIndex) throws Exception {
-		
+
 		systemLogService.writeLog("GET", "/api/ipo", Integer.toString(ipoIndex));
 		return ipoService.selectIpoDetail(ipoIndex);
 	}
