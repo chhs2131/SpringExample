@@ -35,4 +35,42 @@
 		    	certification_date = NOW()
 		  WHERE user_id = #{userId}
 	</update>
+
+
+	<select id="selectKakaoMember" parameterType="String"
+		resultType="kr.ac.inha.board.login.dto.KakaoMemberDto">
+		SELECT kakao_uid,
+				user_no,
+				access_token,
+				refresh_token,
+				DATE_FORMAT(regist_date, '%Y-%m-%d') regist_date,
+				DATE_FORMAT(refresh_date, '%Y-%m-%d') refresh_date,
+				expires_in,
+				refresh_token_expires_in
+		FROM members_kakao
+		WHERE kakao_uid = #{kakaoUid}
+	</select>
+	
+	
+	<insert id="insertMember" parameterType="kr.ac.inha.board.login.dto.MemberDto"
+			useGeneratedKeys="true" keyColumn="user_no" keyProperty="userNo" >
+		 INSERT INTO members
+				  (regist_date)
+			VALUES (
+					NOW()
+					)
+		<selectKey keyProperty="lastPk" resultType="Integer" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	<insert id="insertKakaoMember" parameterType="kr.ac.inha.board.login.dto.KakaoApiUserDto">
+		 INSERT INTO members_kakao
+				  (kakao_uid, user_no)
+			VALUES (#{kakaoUid},
+			        #{userNo}
+			        )
+			        
+	</insert>
+	
+	
 </mapper>

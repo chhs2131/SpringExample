@@ -13,10 +13,13 @@ public class KakaoApiUserDto {
 	private String id;
 	@JsonProperty("connected_at")
 	private String connectedAt;
+	
+	/*
 	private String nickname;
 	
 	@JsonProperty("properties")
 	public void setProperties(Map<String, String> apiReturn) {
 		this.nickname = apiReturn.get("nickname");
 	}
+	*/
 }

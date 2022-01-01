@@ -1,21 +1,18 @@
 package kr.ac.inha.board.login.controller;
 
+import org.apache.groovy.parser.antlr4.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import kr.ac.inha.board.login.dto.KakaoApiUserDto;
+import kr.ac.inha.board.login.dto.KakaoMemberDto;
 import kr.ac.inha.board.login.dto.KakaoOAuthDto;
 import kr.ac.inha.board.login.service.KakaoLoginService;
-import lombok.RequiredArgsConstructor;
 
 @Controller
 public class KakaoController {
@@ -31,31 +28,20 @@ public class KakaoController {
 
 	@RequestMapping(value="/login/kakao", method=RequestMethod.GET)
 	@ResponseBody
-	public String kakaoLogin(String code) throws Exception {
-		String token = kakaoLoginService.getFirstToken(code);
-		String returnValue = kakaoLoginService.getKakaoUid(token);
-		return returnValue;
-	}
-
-	@RequestMapping(value="/login/kakao2", method=RequestMethod.GET)
-	@ResponseBody
-	public String kakaoLogin2(String code) throws Exception {
-		String returnValue = kakaoLoginService.getTest(code);
-		return returnValue;
-	}
-	
-	@RequestMapping(value="/login/ttt", method=RequestMethod.GET)
-	@ResponseBody
-	public String kakaoLogin3(String code) throws Exception {
-		String returnValue = kakaoLoginService.testTest(code);
-		return returnValue;
-	}
-	
-	@RequestMapping(value="/login/kakaoUid", method=RequestMethod.GET)
-	@ResponseBody
-	public String kakaoUid(String accessToken) throws Exception {
-		String token = kakaoLoginService.getKakaoUid(accessToken);
-		return token;
+	public KakaoApiUserDto kakaoLogin(String code) throws Exception {
+		KakaoOAuthDto kakaoOAuthDto = kakaoLoginService.getToken(code);  //Token을 받아옵니다.
+		KakaoApiUserDto kakaoApiUserDto = kakaoLoginService.getKakaoUid(kakaoOAuthDto.getAccessToken());  //카카오 계정정보를 받아옵니다.
+		KakaoMemberDto kakaoMemberDto = kakaoLoginService.selectKakaoMember(kakaoApiUserDto.getId());  //DB에 기등록된 사용자인지 확인합니다.
+		
+		
+		//boolean already = StringUtils.isEmpty(kakaoMemberDto.getKakaoUid());
+		//boolean already = kakaoMemberDto.equals(null);
+		if(kakaoMemberDto == null) { //DB에 등록되지 않았으면 신규등록합니다.
+			System.out.println("신규등록진행");
+			kakaoLoginService.insertKakaoMember(kakaoOAuthDto, kakaoApiUserDto);
+		}
+		
+		return kakaoApiUserDto;
 	}
 	
 	@RequestMapping(value="/login/kakaoTest")
