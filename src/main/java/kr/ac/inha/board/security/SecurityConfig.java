@@ -41,7 +41,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		// 로그아웃시 지정 페이지로 이동
 		//http.logout().logoutSuccessUrl("/board/openBoardList3.do").invalidateHttpSession(true);
-
 	}
 
 	// 계정 정보 확인 및 비교하여 등록된 사용자인지 확인

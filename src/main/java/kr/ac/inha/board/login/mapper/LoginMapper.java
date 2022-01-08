@@ -15,7 +15,8 @@ public interface LoginMapper {
 	void insertMembers(MembersDto membersDto) throws Exception;
 	void updateMembersCert(MembersDto membersDto) throws Exception;
 	
-	int insertMember() throws Exception;
+	MemberDto selectMember(long userNo) throws Exception;
+	int insertMember(MemberDto memberDto) throws Exception;
 	KakaoMemberDto selectKakaoMember(String kakaoUid) throws Exception;
 	void insertKakaoMember(KakaoMemberDto kakaoMemberDto) throws Exception;
 }

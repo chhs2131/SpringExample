@@ -51,25 +51,35 @@
 		WHERE kakao_uid = #{kakaoUid}
 	</select>
 	
-	
+	<select id="selectMember" parameterType="Long" resultType="kr.ac.inha.board.login.dto.MemberDto">
+		SELECT 	user_no,
+				role_name,
+				enabled,
+				regist_date
+		FROM 	members
+		WHERE 	user_no = #{userNo}
+	</select>
 	<insert id="insertMember" parameterType="kr.ac.inha.board.login.dto.MemberDto"
-			useGeneratedKeys="true" keyColumn="user_no" keyProperty="userNo" >
+			 useGeneratedKeys="true" keyColumn="user_no" keyProperty="userNo" >
 		 INSERT INTO members
 				  (regist_date)
 			VALUES (
 					NOW()
 					)
-		<selectKey keyProperty="lastPk" resultType="Integer" order="AFTER">
-			SELECT LAST_INSERT_ID()
-		</selectKey>
 	</insert>
 	<insert id="insertKakaoMember" parameterType="kr.ac.inha.board.login.dto.KakaoApiUserDto">
 		 INSERT INTO members_kakao
-				  (kakao_uid, user_no)
+				  (	kakao_uid,
+					user_no,
+					access_token,
+					refresh_token,
+					regist_date )
 			VALUES (#{kakaoUid},
-			        #{userNo}
+			        #{userNo},
+			        #{accessToken},
+			        #{refreshToken},
+			        NOW()
 			        )
-			        
 	</insert>
 	
 	

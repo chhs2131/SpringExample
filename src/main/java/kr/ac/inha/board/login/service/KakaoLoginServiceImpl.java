@@ -21,7 +21,7 @@ public class KakaoLoginServiceImpl implements KakaoLoginService {
 	@Autowired
 	private LoginMapper loginMapper;
 	
-	String kakaoRestKey = "a130d4bc5b0df2dd600ac87ffdda755a";
+	String kakaoRestKey = "e0b6130240281c4b18e88e405545754f";
     HttpConnection httpConnection = new HttpConnection();
 	
 	public KakaoOAuthDto getToken(String authCode) throws Exception {
@@ -67,17 +67,18 @@ public class KakaoLoginServiceImpl implements KakaoLoginService {
 		return loginMapper.selectKakaoMember(kakaoUid);
 	}
 	
-	public String insertKakaoMember(KakaoOAuthDto kakaoOAuthDto, KakaoApiUserDto kakaoApiUserDto) throws Exception {
+	public MemberDto insertKakaoMember(KakaoOAuthDto kakaoOAuthDto, KakaoApiUserDto kakaoApiUserDto) throws Exception {
 		//신규 계정 생성
-		int newUserNo = loginMapper.insertMember();
+		MemberDto memberDto = new MemberDto();
+		loginMapper.insertMember(memberDto);
 		
 		//카카오 정보 정리
 		KakaoMemberDto kakaoMemberDto = new KakaoMemberDto();
-		kakaoMemberDto.setUserNo(newUserNo);
+		kakaoMemberDto.setUserNo(memberDto.getUserNo());
 		kakaoMemberDto.setKakaoUid(kakaoApiUserDto.getId());
 		
 		kakaoMemberDto.setAccessToken(kakaoOAuthDto.getAccessToken());
-		kakaoMemberDto.setRefreshDate(kakaoOAuthDto.getRefreshToken());
+		//kakaoMemberDto.setRefreshDate(kakaoOAuthDto.get);
 		//kakaoMemberDto.setExpiresIn(kakaoOAuthDto.getExpiresIn());
 		kakaoMemberDto.setRefreshToken(kakaoOAuthDto.getRefreshToken());
 		//kakaoMemberDto.setRefreshTokenExpiresIn(kakaoOAuthDto.getRefreshTokenExpiresIn());
@@ -85,7 +86,11 @@ public class KakaoLoginServiceImpl implements KakaoLoginService {
 		//카카오 계정정보 등록
 		System.out.println(kakaoMemberDto);
         loginMapper.insertKakaoMember(kakaoMemberDto);
-		return "hello";
+		return memberDto;
+	}
+	
+	public MemberDto selectMember(long userNo) throws Exception {
+		return loginMapper.selectMember(userNo);
 	}
 
 }
