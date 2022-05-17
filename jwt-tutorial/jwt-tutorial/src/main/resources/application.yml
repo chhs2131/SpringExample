@@ -1,0 +1,35 @@
+spring:
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+      #create: 서버 시작에 모든 테이블 생성
+      #create-drop: 서버 시작에 모든 테이블 생성, 서버 종료에 테이블 삭제
+      #update: 서버 시작에 변경된 내용 반영. 테이블이 없으면 생성
+      #validate: 서버 시작에 엔티티와 테이블 비교, 다르면 종료
+      #none: 아무 처리하지 않음
+    properties:
+      hibernate:
+        format_sql: true
+        show_sal: true
+    defer-datasource-initialization: true
+
+logging:
+  level:
+    com.jwttest: DEBUG
+
+jwt:
+  header: Authorization
+  secret: c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQK
+  #secret: ENEq2uCID45jWeOJPFe5v7X5o5Q1YXUho9nNOfepI3g
+  #Secret-Key를 Base64 Encoding한 값.
+  token-validity-in-seconds: 86400

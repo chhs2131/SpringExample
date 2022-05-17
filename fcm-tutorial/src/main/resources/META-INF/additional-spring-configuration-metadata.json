@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "project.properties.firebase-create-scoped",
+      "type": "java.lang.String",
+      "description": "Description for project.properties.firebase-create-scoped."
+  }
+] }
