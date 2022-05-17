@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.ac.inha.board.ipo.mapper.IpoMapper">
+	<select id="selectIpoList" resultType="kr.ac.inha.board.ipo.dto.IpoDto">
+		<![CDATA[
+			SELECT
+				ipo_index,
+				stock_name,
+				underwriter,
+				ipo_start_date,
+				ipo_refund_date,
+				ipo_debut_date,
+				ipo_price,
+				debut_price
+			FROM
+			     ipo
+			ORDER BY ipo_index DESC
+		]]>
+	</select>
+
+	<select id="selectIpoDetail" parameterType="int"
+		resultType="kr.ac.inha.board.ipo.dto.IpoDto">
+		<![CDATA[
+			SELECT
+				*
+			FROM
+			    ipo
+			WHERE
+				  ipo_index = #{ipoIndex}
+		]]>
+	</select>
+	
+	<delete id="deleteIpo" parameterType="int">
+		<![CDATA[
+			DELETE
+			FROM
+				ipo
+			WHERE 
+			      ipo_index = #{ipoIndex}
+		]]>
+	</delete>
+	
+	<update id="updateIpo"
+		parameterType="kr.ac.inha.board.ipo.dto.IpoDto">
+		<![CDATA[
+			UPDATE
+				ipo
+			SET
+				stock_name = #{stockName},
+				stock_exchange = #{stockExchange},
+				stock_code = #{stockCode},
+				sector = #{sector},
+				ipo_price = #{ipoPrice},
+				lock_up_percent = #{lockUpPercent},
+				ipo_retail_acceptance_rate = #{ipoRetailAcceptanceRate},
+				ipo_institutional_acceptance_rate = #{ipoInstitutionalAcceptanceRate},
+				debut_price = #{debutPrice},
+				number_of_ipo_shares = #{numberOfIpoShares},
+				ipo_start_date = #{ipoStartDate},
+				ipo_refund_date = #{ipoRefundDate},
+				ipo_debut_date = #{ipoDebutDate},
+				underwriter = #{underwriter}
+			WHERE 
+				ipo_index = #{ipoIndex}
+		]]>
+	</update>
+	
+	<insert id="insertIpo" parameterType="kr.ac.inha.board.ipo.dto.IpoDto" useGeneratedKeys="true" keyProperty="ipoIndex">
+		<![CDATA[
+			INSERT INTO ipo
+			(
+				stock_name,
+				stock_exchange,
+				stock_code,
+				sector,
+				ipo_price,
+				lock_up_percent,
+				ipo_retail_acceptance_rate,
+				ipo_institutional_acceptance_rate,
+				debut_price,
+				number_of_ipo_shares,
+				ipo_start_date,
+				ipo_refund_date,
+				ipo_debut_date,
+				underwriter
+			) 
+			VALUES 
+			(
+				#{stockName},
+				#{stockExchange},
+				#{stockCode},
+				#{sector},
+				#{ipoPrice},
+				#{lockUpPercent},
+				#{ipoRetailAcceptanceRate},
+				#{ipoInstitutionalAcceptanceRate},
+				#{debutPrice},
+				#{numberOfIpoShares},
+				#{ipoStartDate},
+				#{ipoRefundDate},
+				#{ipoDebutDate},
+				#{underwriter}
+			)
+		]]>
+	</insert>
+	
+	<select id="selectSystemLog"  resultType="kr.ac.inha.board.ipo.dto.SystemLogDto">
+		<![CDATA[
+			SELECT
+				log_index,
+				type,
+				target,
+				result,
+				log_date
+			FROM
+			    system_log
+			ORDER BY log_index DESC
+		]]>
+	</select>
+	
+	<insert id="insertSystemLog" parameterType="kr.ac.inha.board.ipo.dto.SystemLogDto" useGeneratedKeys="false" keyProperty="log_index">
+		<![CDATA[
+			INSERT INTO system_log
+			(
+				type,
+				target,
+				result,
+				log_date
+			) 
+			VALUES 
+			(
+				#{type}, 
+				#{target},
+				#{result}, 
+				NOW()
+			)
+		]]>
+	</insert>
+</mapper>

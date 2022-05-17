@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.ac.inha.board.chart.mapper.ChartMapper">
+	<select id="selectStockByJongmok"
+		resultType="kr.ac.inha.board.chart.dto.StockDto">
+		<![CDATA[
+			SELECT jongmok_code,
+			DATE_FORMAT(date, '%Y-%m-%d') AS date,
+			`open`,
+			high,
+			low,
+			`close`,
+			volume
+			FROM stock
+			WHERE jongmok_code = #{jongmokCode}
+			AND date >= '2020-01-01'
+			ORDER BY `date`
+		]]>
+	</select>
+</mapper>
