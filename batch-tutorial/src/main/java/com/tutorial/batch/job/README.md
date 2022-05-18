@@ -21,6 +21,8 @@
 
 <br/>
 자료
+
 - https://docs.spring.io/spring-batch/docs/4.0.x/reference/html/index-single.html#spring-batch-intro
 - https://github.com/jojoldu/spring-batch-in-action
+
 - https://jojoldu.tistory.com/324?category=902551
