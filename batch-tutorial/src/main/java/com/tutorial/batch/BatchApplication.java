@@ -4,6 +4,7 @@ import org.springframework.batch.core.configuration.annotation.EnableBatchProces
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@EnableBatchProcessing  // 배치Batch 기능 활성화
 @SpringBootApplication
 public class BatchApplication {
 	// Spring Batch 가이드 : https://jojoldu.tistory.com/326?category=902551

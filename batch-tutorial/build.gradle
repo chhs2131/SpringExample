@@ -23,6 +23,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'
 	runtimeOnly 'mysql:mysql-connector-java'
