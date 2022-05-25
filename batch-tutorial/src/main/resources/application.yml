@@ -1,9 +1,10 @@
 spring:
   profiles:
-    active: local
+    active: mysql
   batch:
     job:
-      names: ${job.name:NONE}
+      names: processorCompositeBatch
+      #names: ${job.name:NONE}
 ---
 spring:
   profiles: local
@@ -27,6 +28,6 @@ spring:
   datasource:
     hikari:
       jdbc-url: jdbc:mysql://localhost:3306/spring_batch
-      username: jojoldu
-      password: jojoldu1
-      driver-class-name: com.mysql.jdbc.Driver
+      username: root
+      password: root
+      driver-class-name: com.mysql.cj.jdbc.Driver

@@ -1,0 +1,25 @@
+#spring:
+#  datasource:
+#    hikari:
+#      jdbc-url: jdbc:mysql://localhost:3306/spring_batch
+#      username: root
+#      password: root
+#      # driver-class-name: org.mariadb.jdbc.Driver
+#      driver-class-name: com.mysql.cj.jdbc.Driver
+#      connection-test-query: SELECT 1
+
+spring:
+  devtools:
+    livereload:
+      enabled: true
+  datasource:
+    hikari:
+      jdbc-url: jdbc:mysql://127.0.0.1:3306/stockServer
+      username: everywhere
+      password: everypw
+      connection-test-query: SELECT 1
+      driver-class-name: com.mysql.cj.jdbc.Driver
+
+#Mybatis:
+#  configuration:
+#    map-underscore-to-camel-case: true
