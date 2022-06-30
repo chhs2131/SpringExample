@@ -1,0 +1,9 @@
+server:
+  port: 10443
+  ssl:
+    enabled: true
+    key-alias: test-tomcat-key-name  # 생성시 이름과 반드시 일치해야함
+    key-password: 12345678
+    key-store: classpath:ssl/ssl-keystore.p12
+    key-store-type: PKCS12
+    key-store-password: 12345678
