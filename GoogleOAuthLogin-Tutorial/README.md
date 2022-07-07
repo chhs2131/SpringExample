@@ -4,27 +4,27 @@
 <br/>
 
 ## 구글 프로젝트 설정
-![img.png](img.png)
+![img.png](readme-file/img.png)
 
-![img_1.png](img_1.png)
+![img_1.png](readme-file/img_1.png)
 
-![img_2.png](img_2.png)
+![img_2.png](readme-file/img_2.png)
 
-![img_3.png](img_3.png)
+![img_3.png](readme-file/img_3.png)
 
-![img_4.png](img_4.png)
+![img_4.png](readme-file/img_4.png)
 
-![img_5.png](img_5.png)
+![img_5.png](readme-file/img_5.png)
 
-![img_6.png](img_6.png)
+![img_6.png](readme-file/img_6.png)
 
-![img_7.png](img_7.png)
+![img_7.png](readme-file/img_7.png)
 
-![img_8.png](img_8.png)
+![img_8.png](readme-file/img_8.png)
 
-![img_13.png](img_13.png)
+![img_13.png](readme-file/img_13.png)
 
-![img_10.png](img_10.png)
+![img_10.png](readme-file/img_10.png)
 
 
 <br/>
@@ -32,20 +32,20 @@
 ## 실행결과
 
 ### @GetMapping("/test")
-![img_11.png](img_11.png)
+![img_11.png](readme-file/img_11.png)
 
 ### @GetMapping("/googleConfig")
-![img_12.png](img_12.png)
+![img_12.png](readme-file/img_12.png)
 ```json
 GoogleOAuthConfigUtils(clientId=4495667734-f9n6ba1g34lma0i0jrqdpqmeuc8o86m5.apps.googleusercontent.com, secretKey=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, authUrl=https://oauth2.googleapis.com, loginUrl=https://accounts.google.com, redirectUrl=http://localhost:8080/google/login/redirect)
 ```
 
 ### @GetMapping(value = "/oauth/google/login")
-![img_14.png](img_14.png)
+![img_14.png](readme-file/img_14.png)
 
 ### @GetMapping(value = "/oauth/google/redirect")
-![img_15.png](img_15.png)
-![img_16.png](img_16.png)
+![img_15.png](readme-file/img_15.png)
+![img_16.png](readme-file/img_16.png)
 ```json
 {
 "iss": "https://accounts.google.com",
@@ -67,6 +67,9 @@ GoogleOAuthConfigUtils(clientId=4495667734-f9n6ba1g34lma0i0jrqdpqmeuc8o86m5.apps
 "typ": "JWT"
 }
 ```
+
+### @GetMapping(value = "/oauth/google/userinfo")
+![img.png](img.png)
 
 <br/>
 
