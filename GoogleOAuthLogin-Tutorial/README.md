@@ -69,7 +69,15 @@ GoogleOAuthConfigUtils(clientId=4495667734-f9n6ba1g34lma0i0jrqdpqmeuc8o86m5.apps
 ```
 
 ### @GetMapping(value = "/oauth/google/userinfo")
-![img.png](img.png)
+![img.png](readme-file/img99.png)
+```json
+{
+    "id": "109xxxxxxxxxxxxxxxx249",
+    "email": "xxxxxxxx@gmail.com",
+    "verified_email": true,
+    "picture": "https://lh3.googleusercontent.com/a-/AFdxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxs96-c"
+}
+```
 
 <br/>
 
