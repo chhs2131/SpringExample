@@ -2,8 +2,10 @@ server:
   port: 8080
 
 google:
-  clientId: 4495667734-f9n6ba1g34lma0i0jrqdpqmeuc8o86m5.apps.googleusercontent.com
-  secretKey: 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
+  clientId: 1065296779742-lpds6kkerqadvoqjgvvfj6up83pccsju.apps.googleusercontent.com
+  secretKey: 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
+  #clientId: 4495667734-f9n6ba1g34lma0i0jrqdpqmeuc8o86m5.apps.googleusercontent.com
+  #secretKey: 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
   authUrl: https://oauth2.googleapis.com
   loginUrl: https://accounts.google.com
   redirectUrl: http://localhost:8080/oauth/google/redirect

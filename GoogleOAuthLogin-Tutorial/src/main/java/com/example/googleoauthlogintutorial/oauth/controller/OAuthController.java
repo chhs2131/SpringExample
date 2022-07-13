@@ -15,6 +15,7 @@ import org.springframework.http.*;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -63,7 +64,7 @@ public class OAuthController {
     }
 
     @GetMapping(value = "/oauth/google/redirect")
-    public ResponseEntity<GoogleLoginDto> redirectGoogleLogin(
+    public ResponseEntity<GoogleLoginResponseDto> redirectGoogleLogin(
             @RequestParam(value = "code") String authCode
     ) {
         // HTTP 통신을 위해 RestTemplate 활용
@@ -91,22 +92,7 @@ public class OAuthController {
             objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL); // NULL이 아닌 값만 응답받기(NULL인 경우는 생략)
             GoogleLoginResponseDto googleLoginResponse = objectMapper.readValue(apiResponseJson.getBody(), new TypeReference<GoogleLoginResponseDto>() {});
 
-            // 사용자의 정보는 JWT Token으로 저장되어 있고, Id_Token에 값을 저장한다.
-            String jwtToken = googleLoginResponse.getIdToken();
-
-            // JWT Token을 전달해 JWT 저장된 사용자 정보 확인
-            String requestUrl = UriComponentsBuilder.fromHttpUrl(configUtils.getAuthUrl() + "/tokeninfo").queryParam("id_token", jwtToken).toUriString();
-
-            String resultJson = restTemplate.getForObject(requestUrl, String.class);
-
-            if(resultJson != null) {
-                GoogleLoginDto userInfoDto = objectMapper.readValue(resultJson, new TypeReference<GoogleLoginDto>() {});
-
-                return ResponseEntity.ok().body(userInfoDto);
-            }
-            else {
-                throw new Exception("Google OAuth failed!");
-            }
+            return ResponseEntity.ok().body(googleLoginResponse);
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -132,4 +118,57 @@ public class OAuthController {
 
         return ResponseEntity.badRequest().body(null);
     }
+
+//    @GetMapping(value = "/oauth/google/idinfo")
+//    public ResponseEntity<GoogleLoginDto> getIdinfo(
+//            @RequestBody GoogleLoginResponseDto googleLoginResponseDto
+//    ) {
+//        // HTTP 통신을 위해 RestTemplate 활용
+//        RestTemplate restTemplate = new RestTemplate();
+//        GoogleLoginRequestDto requestParams = GoogleLoginRequestDto.builder()
+//                .clientId(configUtils.getClientId())
+//                .clientSecret(configUtils.getSecretKey())
+//                .code(authCode)
+//                .redirectUri(configUtils.getRedirectUrl())
+//                .grantType("authorization_code")
+//                .build();
+//
+//        try {
+//            // Http Header 설정
+//            HttpHeaders headers = new HttpHeaders();
+//            headers.setContentType(MediaType.APPLICATION_JSON);
+//            HttpEntity<GoogleLoginRequestDto> httpRequestEntity = new HttpEntity<>(requestParams, headers);
+//            log.info("httpRequestEntity: " + httpRequestEntity.toString());
+//            ResponseEntity<String> apiResponseJson = restTemplate.postForEntity(configUtils.getAuthUrl() + "/token", httpRequestEntity, String.class);
+//            log.info("apiResponseJson: " + apiResponseJson);  // 이곳에 AccessToken 정보가 포함되어 있음.
+//
+//            // ObjectMapper를 통해 String to Object로 변환
+//            ObjectMapper objectMapper = new ObjectMapper();
+//            objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
+//            objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL); // NULL이 아닌 값만 응답받기(NULL인 경우는 생략)
+//            GoogleLoginResponseDto googleLoginResponse = objectMapper.readValue(apiResponseJson.getBody(), new TypeReference<GoogleLoginResponseDto>() {});
+//
+//            // 사용자의 정보는 JWT Token으로 저장되어 있고, Id_Token에 값을 저장한다.
+//            String jwtToken = googleLoginResponse.getIdToken();
+//
+//            // JWT Token을 전달해 JWT 저장된 사용자 정보 확인
+//            String requestUrl = UriComponentsBuilder.fromHttpUrl(configUtils.getAuthUrl() + "/tokeninfo").queryParam("id_token", jwtToken).toUriString();
+//
+//            String resultJson = restTemplate.getForObject(requestUrl, String.class);
+//
+//            if(resultJson != null) {
+//                GoogleLoginDto userInfoDto = objectMapper.readValue(resultJson, new TypeReference<GoogleLoginDto>() {});
+//
+//                return ResponseEntity.ok().body(userInfoDto);
+//            }
+//            else {
+//                throw new Exception("Google OAuth failed!");
+//            }
+//        }
+//        catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        return ResponseEntity.badRequest().body(null);
+//    }
 }

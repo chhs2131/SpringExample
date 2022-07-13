@@ -88,3 +88,15 @@ GoogleOAuthConfigUtils(clientId=4495667734-f9n6ba1g34lma0i0jrqdpqmeuc8o86m5.apps
 - https://developers.google.com/api-client-library/java/google-oauth-java-client/oauth2
 - https://mslilsunshine.tistory.com/171
 - https://developers.google.com/identity/protocols/oauth2/web-server
+
+조회할 항목 추가
+- https://developers.google.com/identity/protocols/oauth2/scopes
+- https://developersp.tistory.com/9
+- https://www.daleseo.com/google-oauth/
+
+people API 관련
+- https://developers.google.com/people/api/rest/v1/people/get
+- https://developers.google.com/people/api/rest/v1/people#Person
+- https://zinisang.tistory.com/84
+- https://stackoverflow.com/questions/36466050/why-cant-i-retrieve-emails-addresses-and-phone-numbers-with-google-people-api
+- https://stackoverflow.com/questions/35604406/retrieving-information-about-a-contact-with-google-people-api-java
