@@ -39,3 +39,16 @@ Repository <-> JDBC API <-> H2 DB
 - https://m.blog.naver.com/sgs03091/222067037646
 - https://gmlwjd9405.github.io/2018/12/25/difference-dao-dto-entity.html
 - ![img_1.png](readme_file/img_1.png)
+
+### Entity 객체에서 관계 설정
+- https://cjw-awdsd.tistory.com/47
+- https://kok202.tistory.com/138
+- 순환 참조 문제 (관계 재귀 에러)
+  - https://stackoverflow.com/questions/61094824/getting-infinite-recursion-with-jpa-hibernate-by-onetomany-and-manytoone
+  - https://pasudo123.tistory.com/350
+- https://jforj.tistory.com/83
+- http://daplus.net/java-%ED%8A%B9%EC%A0%95-%EC%97%B4%EC%9D%84-%EC%84%A0%ED%83%9D%ED%95%98%EB%8A%94-spring-jpa/
+
+### List Entity <-> List Dto 변환
+- https://gilu-world.tistory.com/108?category=946596
+- https://www.delftstack.com/ko/howto/java/initialize-arraylist-java/#new-arraylist%25EC%2582%25AC%25EC%259A%25A9-java%25EC%2597%2590%25EC%2584%259C-arraylist-%25EC%25B4%2588%25EA%25B8%25B0%25ED%2599%2594
