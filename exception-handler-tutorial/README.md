@@ -1,5 +1,5 @@
 # Exception Handling Example
-스프링 부트 예외처리(Exception) 예시입니다.
+스프링 부트 사용자 정의 예외처리(Exception) 예시입니다.
 
 <br/>
 
