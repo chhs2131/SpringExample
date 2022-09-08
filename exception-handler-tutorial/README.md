@@ -3,11 +3,9 @@
 
 <br/>
 
-## 구조
+## Package 구조
 
-
-
-### Package
+### Tree
 ```
 📁 com.example.exceptionhandler
  └ 📁 api
@@ -22,11 +20,28 @@
 ```
 
 ### Diagram
+![img.png](img.png)
+
+<br/>
+
+## 실행 구조
+
 
 <br/>
 
 ## 실행 예시
+### CustomException
+Request URI : /test/exception/custom
 
+Request Method : GET
+
+```json
+{
+"status": 409,
+"message": "데이터가 이미 존재합니다",
+"timestamp": "2022-09-08T20:32:06.1623206"
+}
+```
 
 <br/>
 

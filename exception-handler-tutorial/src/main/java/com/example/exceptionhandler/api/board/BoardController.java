@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class BoardController {
     @GetMapping(value = "")
     public String boardListException() {
-        throw new BoardE
+        return null;
     }
 }
