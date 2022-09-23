@@ -2,13 +2,20 @@ package com.example.membermanagementexample.api.test.service;
 
 import com.example.membermanagementexample.api.test.domain.Member;
 import com.example.membermanagementexample.api.test.repository.MemberRepository;
-import com.example.membermanagementexample.api.test.repository.MemoryMemberRepository;
 
 import java.util.List;
 import java.util.Optional;
 
 public class MemberService {
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
+    // 내부에서 직접 new 로 생성하게 되면 새로운 객체가 되므로 차이가 발생할 수 있다.
+    // private final MemberRepository memberRepository = new MemoryMemberRepository();
+
+    // 외부로부터 전달받게하면 동일한 객체를 사용하게되므로 안전하다.
+    private final MemberRepository memberRepository;
+    public MemberService(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }
+
 
     /**
      * register. join.
