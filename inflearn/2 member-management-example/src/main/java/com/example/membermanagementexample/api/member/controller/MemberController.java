@@ -4,8 +4,13 @@ import com.example.membermanagementexample.api.member.domain.Member;
 import com.example.membermanagementexample.api.member.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 // 스프링 컨테이너에 컨트롤러 객체를 생성해 넣어두고 관리한다.
@@ -50,5 +55,12 @@ public class MemberController {
 
         memberService.join(member);
         return "redirect:/";
+    }
+
+    @GetMapping("/members")
+    public String list(Model model) {
+        List<Member> members = memberService.findMembers();
+        model.addAttribute("members", members);  // key is "members" 인 것을 html에 넘겨서 타임리프로 값 탐색진행
+        return "members/memberList.html";
     }
 }
