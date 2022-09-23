@@ -1,4 +1,4 @@
-package com.example.membermanagementexample.api.test.domain;
+package com.example.membermanagementexample.api.member.domain;
 
 import lombok.Data;
 

@@ -1,7 +1,7 @@
-package com.example.membermanagementexample.api.test.service;
+package com.example.membermanagementexample.api.member.service;
 
-import com.example.membermanagementexample.api.test.domain.Member;
-import com.example.membermanagementexample.api.test.repository.MemoryMemberRepository;
+import com.example.membermanagementexample.api.member.domain.Member;
+import com.example.membermanagementexample.api.member.repository.MemoryMemberRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

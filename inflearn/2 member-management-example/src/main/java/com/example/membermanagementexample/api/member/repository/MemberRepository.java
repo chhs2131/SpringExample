@@ -1,6 +1,7 @@
-package com.example.membermanagementexample.api.test.repository;
+package com.example.membermanagementexample.api.member.repository;
 
-import com.example.membermanagementexample.api.test.domain.Member;
+import com.example.membermanagementexample.api.member.domain.Member;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
