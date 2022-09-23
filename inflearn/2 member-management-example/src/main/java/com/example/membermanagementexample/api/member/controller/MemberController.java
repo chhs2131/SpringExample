@@ -1,8 +1,11 @@
 package com.example.membermanagementexample.api.member.controller;
 
+import com.example.membermanagementexample.api.member.domain.Member;
 import com.example.membermanagementexample.api.member.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 // 스프링 컨테이너에 컨트롤러 객체를 생성해 넣어두고 관리한다.
@@ -35,4 +38,17 @@ public class MemberController {
     // setter 가 public 하게 노출되게 되는 단점이 있다. (로딩 시점이후, 런타임에 되면 문제 발생 가능성)
     // @Autowired setMemberSerivce ...
 
+    @GetMapping("/members/new")
+    public String createForm() {
+        return "members/createMemberForm.html";
+    }
+
+    @PostMapping("/members/new")
+    public String  create(MemberForm form) {
+        Member member = new Member();
+        member.setName(form.getName());
+
+        memberService.join(member);
+        return "redirect:/";
+    }
 }
