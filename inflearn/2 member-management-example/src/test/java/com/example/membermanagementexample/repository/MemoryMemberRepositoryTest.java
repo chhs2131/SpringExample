@@ -9,6 +9,8 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
+// @SpringBootTest -> 스프링 컨테이너를 로드해서 테스트를 진행하며 이를 통합테스트라 부른다. (컨테이너없이 순수자바코드로만 하는걸 단위테스트라함)
+// @Transactional -> 각 테스트메소드마다 롤백을 자동으로 진행함
 public class MemoryMemberRepositoryTest {
     /*
     Test 순서는 보장되지 않는다. (즉 순서에 의존되면 안된다)
@@ -28,6 +30,7 @@ public class MemoryMemberRepositoryTest {
     }
 
     @Test
+    // @Commit -> 테스트 완료후 commit 을 진행함
     public void save() {
         Member member = new Member();
         member.setName("String");
