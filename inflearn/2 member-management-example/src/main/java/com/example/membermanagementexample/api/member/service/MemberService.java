@@ -1,8 +1,7 @@
 package com.example.membermanagementexample.api.member.service;
 
 import com.example.membermanagementexample.api.member.domain.Member;
-import com.example.membermanagementexample.api.member.repository.MemberRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.membermanagementexample.api.member.repository.JpaMemberRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,13 +13,11 @@ public class MemberService {
     // private final MemberRepository memberRepository = new MemoryMemberRepository();
 
     // 외부로부터 전달받게하면 동일한 객체를 사용하게되므로 안전하다.
-    private final MemberRepository memberRepository;
+    private final JpaMemberRepository memberRepository;
 
-    @Autowired
-    public MemberService(MemberRepository memberRepository) {
+    public MemberService(JpaMemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
-
 
     /**
      * register. join.

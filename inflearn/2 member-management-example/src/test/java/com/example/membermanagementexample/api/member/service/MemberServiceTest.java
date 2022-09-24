@@ -19,7 +19,6 @@ class MemberServiceTest {
     @BeforeEach
     void beforeEach() {
         memberRepository = new MemoryMemberRepository();
-        memberService = new MemberService(memberRepository);  // 외부에서 전달한 객체를 사용하며 이를 DI(Dependecny Injection)라고 함
     }
 
     @AfterEach
