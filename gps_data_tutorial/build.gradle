@@ -1,0 +1,44 @@
+plugins {
+    id 'org.springframework.boot' version '2.7.2'
+    id 'io.spring.dependency-management' version '1.0.12.RELEASE'
+    id 'java'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    maven {
+        url "https://repo.osgeo.org/repository/release/"
+    }
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    // geotools
+    implementation 'org.geotools:gt-shapefile:27.0'
+    implementation 'org.geotools:gt-swing:27.0'
+    implementation 'org.geotools:gt-main:27.0'
+    //implementation group: 'org.geotools', name: 'gt-shapefile', version: '25.0'
+
+    //implementation 'org.geotools:gt-shapefile'
+    //implementation 'org.geotools:gt-swing'
+    //implementation 'org.geotools:gt-referencing'
+    //implementation 'org.geotools:gt-main'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
