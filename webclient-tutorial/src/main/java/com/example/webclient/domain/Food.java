@@ -1,4 +1,4 @@
-package com.example.webclient;
+package com.example.webclient.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
