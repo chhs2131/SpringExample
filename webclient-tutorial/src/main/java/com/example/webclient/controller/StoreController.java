@@ -16,7 +16,6 @@ public class StoreController {
             new Food("라면", 500, 5000),
             new Food("새우튀김", 2000, 12000),
             new Food("새우볶음밥", 1000, 10000)
-
     );
 
     @RequestMapping("/menu")
