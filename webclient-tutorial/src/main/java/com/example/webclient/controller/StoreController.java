@@ -28,33 +28,8 @@ public class StoreController {
     }
 
     @RequestMapping("/welcome")
-    public String welcome() {
+    public String welcome() throws InterruptedException {
+        Thread.sleep(100);  // 입장 후 0.1초후에 인사한다.
         return "어서오십쇼!";
-    }
-
-    @RequestMapping("/")
-    public void get() {
-//        WebClient client = WebClient.create();
-//        String result = client.get()
-//                .uri("http://localhost:8080/helloworld")
-//                .retrieve()
-//                .bodyToMono(String.class)
-//                .block();
-//        System.out.println(result);
-
-
-        WebClient.create().get().uri("http://localhost:8080/helloworld")
-                .retrieve()
-                .bodyToMono(String.class)
-                .subscribe(System.out::println);
-
-//        Food foods = webClient.get()
-//                .uri("/foods" + "?name=" + "라면")
-//                .retrieve()
-//                //.bodyToFlux(Food.class)
-//                .bodyToMono(Food.class)
-//                //.collectList()
-//                .block();
-//        System.out.println(foods.toString());
     }
 }

@@ -1,14 +1,14 @@
 package com.example.webclient.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.*;
 
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 public class Food {
-    private final String name;
-    private final int kcal;
-    private final int price;
+    private String name;
+    private int kcal;
+    private int price;
 
     @Override
     public String toString() {
