@@ -1,4 +1,4 @@
-package com.example.webclient.domain;
+package com.example.webclient.storeApi.domain;
 
 import lombok.*;
 

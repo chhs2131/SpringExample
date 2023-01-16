@@ -1,6 +1,7 @@
 package com.example.webclient.util;
 
-import com.example.webclient.domain.Food;
+import com.example.webclient.storeApi.domain.Food;
+import com.example.webclient.storeApi.util.WebClientUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.web.reactive.function.client.WebClient;
 

@@ -1,4 +1,4 @@
-package com.example.webclient.util;
+package com.example.webclient.storeApi.util;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
