@@ -1,4 +1,4 @@
-# WebClient 예제
+# WebClient 예제 
 - Reactor WebFlux 는 Reactive Streams를 기반으로 하는 4세대 리액티브 라이브러리이다.
 - non-blocking 방식(비동기)으로 동작해 시스템 효율이 좋다. (기존 RestTemplate은 Blocking 멀티쓰레드 방식)
 - 0개, 1개 또는 N개의 반환을 받을 수 있다.
@@ -7,10 +7,10 @@
 <br/>
 
 
-### 프로젝트 구조
+### 프로젝트 구조 (StoreApi 기준)
 
 ```python
-📁 main.java.com.example.webclient
+📁 main.java.com.example.webclient.storeApi
  └ 📁 controller
     └ 📄 StoreController
     └ 📄 FoodDeliveryAppController -> WebClient를 사용하여 StroeController로 요청을 전달함
