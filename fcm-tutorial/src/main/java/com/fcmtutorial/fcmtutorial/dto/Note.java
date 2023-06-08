@@ -5,6 +5,7 @@ import lombok.Data;
 import java.util.Map;
 
 @Data
+@Deprecated
 public class Note {
     private String subject;
     private String content;
