@@ -1,6 +1,8 @@
 # SpringBoot FCM Tutorial
 SpringBoot에서 FCM(FirebaseSDK)를 이용하여 모바일(안드로이드:Flutter) Device로 단일 Push알림을 보내는 것에 대해 설명함
 
+![image](https://github.com/chhs2131/SpringExample/assets/10378777/05ab7de7-c680-4882-a3a0-d4cf258324b9)
+
 ![img.png](readme-file/img.png)
 
 
@@ -102,3 +104,4 @@ AndroidApp
 ## 참고자료
 - https://firebase.google.com/docs/cloud-messaging/server?hl=ko
 - https://github.com/firebase/firebase-admin-java/blob/7957d316b33994cef898784be2130ff0b9066f8b/src/test/java/com/google/firebase/snippets/FirebaseMessagingSnippets.java#L46-L60
+- https://firebase.google.com/docs/cloud-messaging/fcm-architecture?hl=ko
