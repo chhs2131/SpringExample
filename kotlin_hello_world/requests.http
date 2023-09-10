@@ -1,0 +1,31 @@
+### GET "HELLO WORLD"
+GET http://localhost:8080/hello
+Content-Type: application/json
+
+### GET
+GET http://localhost:8080
+Content-Type: application/json
+
+### POST "HELLO!"
+POST http://localhost:8080/messages
+Content-Type: application/json
+
+{
+  "text": "HELLO!"
+}
+
+### POST "안녕?"
+POST http://localhost:8080/messages
+Content-Type: application/json
+
+{
+  "text": "안녕?"
+}
+
+### GET messages
+GET http://localhost:8080/messages
+Content-Type: application/json
+
+### GET messages id=UUID
+GET http://localhost:8080/messages/286b7fe3-4079-4307-a3b7-d1c49d599467
+Content-Type: application/json
