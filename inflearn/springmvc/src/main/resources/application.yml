@@ -1,0 +1,4 @@
+logging:
+  level:
+    root: info  # ???? debug, ???? info
+  # org.example.springmvc: info
