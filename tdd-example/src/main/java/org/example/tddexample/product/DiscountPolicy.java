@@ -1,5 +1,5 @@
 package org.example.tddexample.product;
 
-enum Discountpolicy {
+public enum DiscountPolicy {
     NONE
 }
