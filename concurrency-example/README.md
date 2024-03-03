@@ -14,7 +14,7 @@ java에서 동시성을 제어하기 위한 3개의 예시를 다룹니다.
 ## 간단한 Counter 예제
 increase 호출시 count 값을 1씩 증가시키는 Counter 클래스를 동시에 접근하는 방법에 대해 다룹니다.
 
-Counter Class
+### Counter Class
 ```java
 public class Counter {
     private static final int DELAY_TIME = 50;
@@ -27,7 +27,7 @@ public class Counter {
 }
 ```
 
-실패하는 경우
+### 실패하는 경우
 ```java
 @Test
 void originalTest_Fail() throws Exception {
@@ -43,7 +43,7 @@ void originalTest_Fail() throws Exception {
 }
 ```
 
-성공하는 경우 (Synchronized 사용)
+### 성공하는 경우 (Synchronized 사용)
 ```java
 @Test
 void synchronizedTest_Success() throws Exception {
@@ -73,7 +73,7 @@ synchronized void synchronizedIncrease() {
 ![image](https://github.com/chhs2131/SpringExample/assets/10378777/6b64dbb2-bcbd-4f6b-b5a6-a27023872746)
 
 
-Prizes Class - 선착순으로 당첨된 사람들을 기록합니다.
+### Prizes Class - 선착순으로 당첨된 사람들을 기록합니다.
 ```java
 public class Prizes {
     private final List<String> winners;
@@ -90,7 +90,7 @@ public class Prizes {
 }
 ```
 
-실패하는 경우 - 반드시 서버(Prizes Class)에 기록된 당첨자와, 당첨됬다고 통지받은 클라이언트 리스트가 둘다 정상인지 확인해봐야합니다. Prizes Class는 동시성이슈로 덮어쓰기 되었을 수 있습니다.
+### 실패하는 경우 - 반드시 서버(Prizes Class)에 기록된 당첨자와, 당첨됬다고 통지받은 클라이언트 리스트가 둘다 정상인지 확인해봐야합니다. Prizes Class는 동시성이슈로 덮어쓰기 되었을 수 있습니다.
 ```java
 @Test
 void 천명이동시에도전_그중10명이당첨_실패() throws Exception {
@@ -113,7 +113,7 @@ void 천명이동시에도전_그중10명이당첨_실패() throws Exception {
 }
 ```
 
-성공하는 경우 (ReentrantLock 사용)
+### 성공하는 경우 (ReentrantLock 사용)
 ```java
 @Test
 void 천명이동시에도전_그중10명이당첨_reentrantLock_성공() throws Exception {
