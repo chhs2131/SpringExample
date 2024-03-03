@@ -1,6 +1,9 @@
 # Concurrency Example
 keyword: 암시적 락, 명시적 락, 낙관적 락, 비관적 락, Synchronized, volatile, ReentrantLock, StampedLock, Atomic, CAS Algorithm, Future, ExecutorService, completableFuture, ForkJoinPool, ConcurrentHashMap, Semaphore
 
+![image](https://github.com/chhs2131/SpringExample/assets/10378777/93d0ee84-bf83-4b75-ba53-1e8525c33635)
+
+
 <br/>
 
 java에서 동시성을 제어하기 위한 3개의 예시를 다룹니다.
@@ -61,9 +64,14 @@ synchronized void synchronizedIncrease() {
 }
 ```
 
+<br/>
+
 ## 선착순 이벤트 예제
 선착순 n명에게 엄청난 선물을 주는 예제입니다. 동시성 이슈로 중복 당첨자가 발생하면 손해가 막심하겠네요. 
 그리고 분명 당첨되었다고 나왔는데, 전산오류여서 취소됬다고 하면 기분이 정말 안좋겠습니다. 
+
+![image](https://github.com/chhs2131/SpringExample/assets/10378777/6b64dbb2-bcbd-4f6b-b5a6-a27023872746)
+
 
 Prizes Class - 선착순으로 당첨된 사람들을 기록합니다.
 ```java
@@ -134,6 +142,9 @@ void 천명이동시에도전_그중10명이당첨_reentrantLock_성공() throws
     Assertions.assertThat(winners).hasSize(maxWinners);
 }
 ```
+
+
+<br/>
 
 ## 게시글 조회수 (with JPA)
 JPA가 관리하는 Entity도 자바 락을 사용할 수 있을까요?
@@ -226,4 +237,7 @@ public class Board {
 }
 ```
 
+
+
+<br/>
 
