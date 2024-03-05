@@ -189,18 +189,18 @@ class BoardServiceTest {
 @GetMapping("/{id}")
 @Transactional
 public Board getBoard(@PathVariable("id") final Long id) {
-    final Board board = boardRepository.findById(id)
-        .orElseThrow(() -> new IllegalArgumentException("id에 해당하는 게시글이 없습니다."));
-
     lock.lock();
     try {
+        final Board board = boardRepository.findById(id)
+            .orElseThrow(() -> new IllegalArgumentException("id에 해당하는 게시글이 없습니다."));
+
         board.increaseViewCount();
         boardRepository.save(board);
+
+        return board;
     } finally {
         lock.unlock();
     }
-
-    return board;
 }
 ```
 
