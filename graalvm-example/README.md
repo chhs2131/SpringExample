@@ -1,5 +1,173 @@
-# Getting Started
+# 그랄VM 예제
+- 언어: Java 22
+- 프레임워크: SpringBoot 3.2
+- Apple Silicon M2 Pro
+- 운영체제: MacOS 14.0(Sonoma 23A344)
 
-![img.png](img.png)
 
+# GraalVM은 어떻게 동작하는가?
+
+nothing.
+
+
+
+
+<!-- ###################################################################################################################################### -->
+<!-- ###################################################################################################################################### -->
+<!-- ###################################################################################################################################### -->
+<br/>
+
+# Example (순수 자바)
+
+### GraalVM 설치하기
+설치하기
+https://www.graalvm.org/downloads/
+
+### 예제 코드 작성 
+![img_1.png](img_1.png)
+
+```java
+// package graalvm.graalvmexample;  // <- 이것을 작성하지 않도록 주의!
+
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("HEllo World");
+    }
+}
+```
+
+### 바이트코드로 컴파일하기
+`javac` 명령을 통해 바이트코드로 컴파일한다.
+```shell
+    ~/Doc/GitHub/SpringExample/graalvm-example/src/main/java/graalvm/graalvmexample    GraalVM +11 !4 ?43  javac HelloWorld.java                                                                                                                                                           ✔  14:28:04  
+```
+
+### NativeImage로 만들기
+`native-image` 명령을 통해 플랫폼에 맞는 기계어로 변환한다. 
+```shell
+    ~/Doc/GitHub/SpringExample/graalvm-example/src/main/java/graalvm/graalvmexample    GraalVM +11 !4 ?44  native-image HelloWorld                                                                                                                                                         ✔  14:32:50  
+========================================================================================================================
+GraalVM Native Image: Generating 'helloworld' (executable)...
+========================================================================================================================
+[1/8] Initializing...                                                                                   (11.4s @ 0.10GB)
+ Java version: 22.0.2+9, vendor version: Oracle GraalVM 22.0.2+9.1
+ Graal compiler: optimization level: 2, target machine: armv8-a, PGO: off
+ C compiler: cc (apple, arm64, 15.0.0)
+ Garbage collector: Serial GC (max heap size: 80% of RAM)
+ 1 user-specific feature(s):
+ - com.oracle.svm.thirdparty.gson.GsonFeature
+------------------------------------------------------------------------------------------------------------------------
+Build resources:
+ - 12.09GB of memory (75.6% of 16.00GB system memory, determined at start)
+ - 12 thread(s) (100.0% of 12 available processor(s), determined at start)
+[2/8] Performing analysis...  [****]                                                                     (3.7s @ 0.19GB)
+    2,056 reachable types   (59.9% of    3,430 total)
+    1,849 reachable fields  (38.8% of    4,760 total)
+    8,637 reachable methods (35.5% of   24,345 total)
+      778 types,    25 fields, and   348 methods registered for reflection
+       49 types,    33 fields, and    48 methods registered for JNI access
+        4 native libraries: -framework Foundation, dl, pthread, z
+[3/8] Building universe...                                                                               (0.6s @ 0.21GB)
+[4/8] Parsing methods...      [*]                                                                        (0.4s @ 0.22GB)
+[5/8] Inlining methods...     [***]                                                                      (0.4s @ 0.26GB)
+[6/8] Compiling methods...    [***]                                                                      (6.9s @ 0.33GB)
+[7/8] Laying out methods...   [*]                                                                        (0.5s @ 0.34GB)
+[8/8] Creating image...       [*]                                                                        (0.9s @ 0.37GB)
+   2.62MB (44.08%) for code area:     3,897 compilation units
+   3.13MB (52.49%) for image heap:   51,987 objects and 71 resources
+ 209.35kB ( 3.43%) for other data
+   5.95MB in total
+------------------------------------------------------------------------------------------------------------------------
+Top 10 origins of code area:                                Top 10 object types in image heap:
+   1.26MB java.base                                          695.51kB byte[] for java.lang.String
+   1.14MB svm.jar (Native Image)                             692.82kB byte[] for code metadata
+  80.79kB com.oracle.svm.svm_enterprise                      364.24kB java.lang.String
+  25.46kB org.graalvm.nativeimage.base                       332.24kB java.lang.Class
+  22.27kB jdk.proxy3                                         143.75kB java.util.HashMap$Node
+  21.27kB org.graalvm.collections                            122.16kB heap alignment
+  19.61kB jdk.proxy1                                         114.52kB char[]
+  14.85kB jdk.graal.compiler                                  86.09kB java.lang.Object[]
+  14.50kB jdk.internal.vm.ci                                  80.48kB byte[] for reflection metadata
+   8.26kB jdk.proxy2                                          80.31kB com.oracle.svm.core.hub.DynamicHubCompanion
+  456.00B for 1 more packages                                487.87kB for 532 more object types
+                              Use '-H:+BuildReport' to create a report with more details.
+------------------------------------------------------------------------------------------------------------------------
+Security report:
+ - Binary includes Java deserialization.
+ - Use '--enable-sbom' to embed a Software Bill of Materials (SBOM) in the binary.
+------------------------------------------------------------------------------------------------------------------------
+Recommendations:
+ PGO:  Use Profile-Guided Optimizations ('--pgo') for improved throughput.
+ HEAP: Set max heap for improved and more predictable memory usage.
+ CPU:  Enable more CPU features with '-march=native' for improved performance.
+ QBM:  Use the quick build mode ('-Ob') to speed up builds during development.
+------------------------------------------------------------------------------------------------------------------------
+                        1.0s (3.9% of total time) in 408 GCs | Peak RSS: 0.69GB | CPU load: 4.23
+------------------------------------------------------------------------------------------------------------------------
+Build artifacts:
+ /Users/hyeon/Documents/GitHub/SpringExample/graalvm-example/src/main/java/graalvm/graalvmexample/helloworld (executable)
+========================================================================================================================
+Finished generating 'helloworld' in 25.3s.
+```
+
+### 실행하기
+생성된 helloworld를 실행할 수 있다.
+
+![img_2.png](img_2.png)
+
+
+
+<!-- ###################################################################################################################################### -->
+<!-- ###################################################################################################################################### -->
+<!-- ###################################################################################################################################### -->
+<br/>
+
+# Example (with spring boot)
+
+nothing.
+
+
+
+
+
+<!-- ###################################################################################################################################### -->
+<!-- ###################################################################################################################################### -->
+<!-- ###################################################################################################################################### -->
+<br/>
+
+### 참고자료
+
+시작하기
 https://www.graalvm.org/latest/docs/getting-started/
+
+native-image 명령어도 설치해야함
+https://www.graalvm.org/22.0/reference-manual/native-image/
+
+### NoClassDefFoundError
+주의점! 예제를 만들때 `package`경로가 들어가지 않도록 주의한다.
+Link: https://stackoverflow.com/questions/17973970/how-can-i-solve-java-lang-noclassdeffounderror
+```shell
+    ~/Doc/GitHub/SpringExample/graalvm-example/src/main/java/graalvm/graalvmexample    GraalVM +11 !4 ?43  native-image HelloWorld                                                                                                                                                         ✔  14:28:10  
+========================================================================================================================
+GraalVM Native Image: Generating 'helloworld' (executable)...
+========================================================================================================================
+[1/8] Initializing...                                                                                    (0.0s @ 0.07GB)
+
+The build process encountered an unexpected error:
+
+> java.lang.NoClassDefFoundError: HelloWorld (wrong name: graalvm/graalvmexample/HelloWorld)
+
+Please inspect the generated error report at:
+/Users/hyeon/Documents/GitHub/SpringExample/graalvm-example/src/main/java/graalvm/graalvmexample/svm_err_b_20240909T142820.972_pid24795.md
+
+If you are unable to resolve this problem, please file an issue with the error report at:
+https://graalvm.org/support
+```
+
+- 에러 내용상세: svm_err_b_20240909T142820.972_pid24795.md
+
+### etc
+https://docs.spring.io/spring-boot/reference/packaging/native-image/index.html
+
+https://www.baeldung.com/graal-java-jit-compiler
+
