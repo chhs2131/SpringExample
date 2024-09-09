@@ -116,7 +116,6 @@ Finished generating 'helloworld' in 25.3s.
 ![img_2.png](img_2.png)
 
 
-
 <!-- ###################################################################################################################################### -->
 <!-- ###################################################################################################################################### -->
 <!-- ###################################################################################################################################### -->
@@ -124,11 +123,74 @@ Finished generating 'helloworld' in 25.3s.
 
 # Example (with spring boot)
 
-nothing.
+
+### gradle을 사용해서 빌드하기
+graalvm build tool을 추가하고, `./gradlew nativeCompile` 명령어를 사용하여 빌드가 가능함
+```groovy
+plugins {
+    id 'org.graalvm.buildtools.native' version '0.10.2'
+}
+```
+
+![img_3.png](img_3.png)
 
 
+### 빌드 결과물 위치
+인텔리제이 스프링부트 프로젝트 기준 `project/build/native/natvieCompile` 에 위치함
+
+![img_4.png](img_4.png)
 
 
+### 실행결과
+61ms만에 빈 스프링 프로젝트가 실행된 모습
+
+
+![img_8.png](img_8.png)
+
+![img_9.png](img_9.png)
+
+# BootBuildImage
+
+도커 이미지로 만들어봅시다.
+
+`./gradlew bootBuildImage` 명령어를 사용합니다.
+
+### 빌드 성공
+14분 걸린거... 이거 맞나요..? ^_^
+![img_6.png](img_6.png)
+
+### 도커 이미지로 추가된 모습
+![img_7.png](img_7.png)
+
+### 실행한 모습
+`docker run -d -p 8080:8080 --name graalvm-example-container graalvm-example:0.0.1-SNAPSHOT`
+
+안켜짐 ㅠㅠ
+```shell
+
+    ~/Documents/GitHub/SpringExample/graalvm-example/build/native    GraalVM +23 !7 ?42  docker logs -f graalvm-example-container                                                                                                                                                          ✔  03:12:46  
+OrbStack ERROR: Dynamic loader not found: /lib64/ld-linux-x86-64.so.2
+
+This usually means that you're running an x86 program on an arm64 OS without multi-arch libraries.
+To fix this, you can:
+  1. Use an Intel (amd64) container to run this program; or
+  2. Install multi-arch libraries in this container.
+
+This can also be caused by running a glibc executable in a musl distro (e.g. Alpine), or vice versa.
+
+For more details and instructions, see https://go.orbstack.dev/multiarch
+OrbStack ERROR: Dynamic loader not found: /lib64/ld-linux-x86-64.so.2
+
+This usually means that you're running an x86 program on an arm64 OS without multi-arch libraries.
+To fix this, you can:
+  1. Use an Intel (amd64) container to run this program; or
+  2. Install multi-arch libraries in this container.
+
+This can also be caused by running a glibc executable in a musl distro (e.g. Alpine), or vice versa.
+
+For more details and instructions, see https://go.orbstack.dev/multiarch
+
+```
 
 <!-- ###################################################################################################################################### -->
 <!-- ###################################################################################################################################### -->
@@ -171,3 +233,6 @@ https://docs.spring.io/spring-boot/reference/packaging/native-image/index.html
 
 https://www.baeldung.com/graal-java-jit-compiler
 
+https://docs.spring.io/spring-boot/reference/packaging/native-image/introducing-graalvm-native-images.html
+
+https://docs.spring.io/spring-boot/how-to/native-image/developing-your-first-application.html
