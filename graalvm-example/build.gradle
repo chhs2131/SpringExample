@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'graalvm'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.2-SNAPSHOT'
 
 java {
     toolchain {
@@ -34,4 +34,11 @@ dependencies {
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+bootBuildImage {
+    builder = 'paketobuildpacks/builder-jammy-buildpackless-tiny'
+    buildpacks = ['paketobuildpacks/java-native-image']
+    platforms = ['linux/amd64', 'linux/arm64'] // 멀티 아키텍처 설정
+    createdDate = "now" // 또는 ISO 8601 규격에 맞는 값을 입력
 }

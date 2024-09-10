@@ -162,10 +162,34 @@ plugins {
 ### 도커 이미지로 추가된 모습
 ![img_7.png](img_7.png)
 
-### 실행한 모습
+### 실행하기
 `docker run -d -p 8080:8080 --name graalvm-example-container graalvm-example:0.0.1-SNAPSHOT`
 
-안켜짐 ㅠㅠ
+
+### AppleSilicon 실행 오류 (Dynamic loader not found: /lib64/ld-linux-x86-64.so.2)
+https://github.com/spring-projects/spring-boot/issues/38714
+
+https://github.com/dashaun/paketo-arm64
+
+https://github.com/dashaun/paketo-arm64/issues/19
+
+아래 명령어를 build.gradle에 추가하여 해결 가능
+```groovy
+bootBuildImage {
+    builder = 'paketobuildpacks/builder-jammy-buildpackless-tiny'
+    buildpacks = ['paketobuildpacks/java-native-image']
+}
+```
+
+실행완료 ^_^
+![img_10.png](img_10.png)
+
+### 다른 해결방법 - orbstack(container) - AppleSilicon 오류
+인텔 머신을 추가하고 실행하는 방법도 있다.
+`orb update`
+
+`orb createorb create --arch amd64 ubuntu new-ubuntu`
+
 ```shell
 
     ~/Documents/GitHub/SpringExample/graalvm-example/build/native    GraalVM +23 !7 ?42  docker logs -f graalvm-example-container                                                                                                                                                          ✔  03:12:46  
@@ -228,6 +252,16 @@ https://graalvm.org/support
 
 - 에러 내용상세: svm_err_b_20240909T142820.972_pid24795.md
 
+### [도커 실행 문제] exec format error
+요약하자면 결국 ARM 기반에서 빌드된 이미지를 AMD 기반에서 실행시켰기 때문이다.
+
+
+`exec /cnb/process/web: exec format error`
+
+https://velog.io/@baeyuna97/exec-user-process-caused-exec-format-error-%EC%97%90%EB%9F%AC%ED%95%B4%EA%B2%B0
+
+https://bconfiden2.github.io/2022/06/29/build-on-mac/
+
 ### etc
 https://docs.spring.io/spring-boot/reference/packaging/native-image/index.html
 
@@ -236,3 +270,10 @@ https://www.baeldung.com/graal-java-jit-compiler
 https://docs.spring.io/spring-boot/reference/packaging/native-image/introducing-graalvm-native-images.html
 
 https://docs.spring.io/spring-boot/how-to/native-image/developing-your-first-application.html
+
+https://docs.orbstack.dev/machines/#intel-x86-emulation
+
+https://medium.com/@dudwls96/multi-architecture-docker-images-%EB%B9%8C%EB%93%9C-%ED%99%98%EA%B2%BD-%EA%B5%AC%EC%84%B1%ED%95%98%EA%B8%B0-421ca3ae380d
+
+SpringBoot 3.4.0 부터는 imagePlatform 옵션이 추가된다.
+https://stackoverflow.com/questions/78887383/how-to-build-specific-platform-archetecture-image-with-spring-boot-3-x-bootbuild
