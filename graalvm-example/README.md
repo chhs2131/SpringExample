@@ -277,3 +277,10 @@ https://medium.com/@dudwls96/multi-architecture-docker-images-%EB%B9%8C%EB%93%9C
 
 SpringBoot 3.4.0 부터는 imagePlatform 옵션이 추가된다.
 https://stackoverflow.com/questions/78887383/how-to-build-specific-platform-archetecture-image-with-spring-boot-3-x-bootbuild
+
+Oracle 공식: GraalVM Native Image, Spring and Containerisation
+https://luna.oracle.com/lab/fdfd090d-e52c-4481-a8de-dccecdca7d68
+
+Deploying a Spring Boot app as a native GraalVM image with Docker
+https://hilla.dev/blog/ai-chatbot-in-java/deploying-a-spring-boot-app-as-a-graalvm-native-image-with-docker/
+
