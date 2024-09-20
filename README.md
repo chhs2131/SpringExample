@@ -19,3 +19,4 @@
 |13|jpa-tutorial|JPA(ORM) 사용 예제|
 |14|jwt-tutorial|JWT 적용 예제|
 |15|tomcat-ssl-tutorial|Spring내장Tomcat에 SSL 적용한 예제 (https)|
+|16|graalvm-example|GraalVM을 적용한 Java 및 SpringBoot WEB 예제|[Link](https://github.com/chhs2131/SpringExample/tree/main/graalvm-example)|
