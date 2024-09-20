@@ -1,0 +1,25 @@
+spring:
+  jpa:
+    database: postgresql
+    properties:
+      hibernate:
+        format_sql: true
+        highlight_sql: true
+        use_sql_comments: false
+        default_batch_fetch_size: 500
+    hibernate:
+      ddl-auto: update
+
+  application:
+    name: dart-local
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+logging:
+  level:
+    web: debug
+    org.hibernate.SQL: debug
+    org.hibernate.type: trace

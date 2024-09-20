@@ -4,6 +4,10 @@
 - Apple Silicon M2 Pro
 - 운영체제: MacOS 14.0(Sonoma 23A344)
 
+### 시작하기 앞서
+아래 파일들은 모두 Hibernate 및 Datasource 테스트를 위한 파일들이니, 필요하지 않은 경우 삭제 또는 주석처리하여 사용할 것!
+- Library, LibraryController, LibraryRepository, application.yml
+
 
 # GraalVM은 어떻게 동작하는가?
 
@@ -24,7 +28,7 @@ nothing.
 https://www.graalvm.org/downloads/
 
 ### 예제 코드 작성 
-![img_1.png](img_1.png)
+![img_1.png](docs/img_1.png)
 
 ```java
 // package graalvm.graalvmexample;  // <- 이것을 작성하지 않도록 주의!
@@ -113,7 +117,7 @@ Finished generating 'helloworld' in 25.3s.
 ### 실행하기
 생성된 helloworld를 실행할 수 있다.
 
-![img_2.png](img_2.png)
+![img_2.png](docs/img_2.png)
 
 
 <!-- ###################################################################################################################################### -->
@@ -132,22 +136,22 @@ plugins {
 }
 ```
 
-![img_3.png](img_3.png)
+![img_3.png](docs/img_3.png)
 
 
 ### 빌드 결과물 위치
 인텔리제이 스프링부트 프로젝트 기준 `project/build/native/natvieCompile` 에 위치함
 
-![img_4.png](img_4.png)
+![img_4.png](docs/img_4.png)
 
 
 ### 실행결과
 61ms만에 빈 스프링 프로젝트가 실행된 모습
 
 
-![img_8.png](img_8.png)
+![img_8.png](docs/img_8.png)
 
-![img_9.png](img_9.png)
+![img_9.png](docs/img_9.png)
 
 # BootBuildImage
 
@@ -157,10 +161,10 @@ plugins {
 
 ### 빌드 성공
 14분 걸린거... 이거 맞나요..? ^_^
-![img_6.png](img_6.png)
+![img_6.png](docs/img_6.png)
 
 ### 도커 이미지로 추가된 모습
-![img_7.png](img_7.png)
+![img_7.png](docs/img_7.png)
 
 ### 실행하기
 `docker run -d -p 8080:8080 --name graalvm-example-container graalvm-example:0.0.1-SNAPSHOT`
@@ -182,7 +186,7 @@ bootBuildImage {
 ```
 
 실행완료 ^_^
-![img_10.png](img_10.png)
+![img_10.png](docs/img_10.png)
 
 ### 다른 해결방법 - orbstack(container) - AppleSilicon 오류
 인텔 머신을 추가하고 실행하는 방법도 있다.
@@ -281,7 +285,7 @@ docker buildx build --platform linux/amd64,linux/arm64 -t hyeonbasak/graalvm-exa
 ```
 
 빌드 성공
-![img_11.png](img_11.png)
+![img_11.png](docs/img_11.png)
 
 ### 실행 성공
 - 빌드를 수행한 컴퓨터(arm64)에서 실행 -> OK!
@@ -289,7 +293,7 @@ docker buildx build --platform linux/amd64,linux/arm64 -t hyeonbasak/graalvm-exa
 
 실제 구글 클라우드런(amd64)에서 시작시간을 측정한 결과 약 40ms가 소요되었다. (SpringBoot WEB 기준)
 
-![img_12.png](img_12.png)
+![img_12.png](docs/img_12.png)
 
 ### 의문점. 멀티플랫폼을 지원한다면 빌드되는 nativeImage는 어떤 아키텍처인 것인가?
 ^_^
@@ -300,7 +304,52 @@ docker buildx build --platform linux/amd64,linux/arm64 -t hyeonbasak/graalvm-exa
 <!-- ###################################################################################################################################### -->
 <br/>
 
-### 참고자료
+# NativeBuild시 메모리 부족 문제
+의존성이 늘어남에 따라 아래와 같이 메모리 부족으로 빌드가 실패하는 경우가 생겼다.
+url: https://stackoverflow.com/questions/77941216/increase-heap-memory-when-building-native-image-with-spring-native
+
+```shell
+[1/8] Initializing...                                                                                   (10.7s @ 0.27GB)
+ Java version: 17.0.12+8-LTS, vendor version: Oracle GraalVM 17.0.12+8.1
+ Graal compiler: optimization level: 2, target machine: armv8-a, PGO: off
+ C compiler: cc (apple, arm64, 15.0.0)
+ Garbage collector: Serial GC (max heap size: 80% of RAM)
+ 2 user-specific feature(s)
+ - org.eclipse.angus.activation.nativeimage.AngusActivationFeature
+ - org.springframework.aot.nativex.feature.PreComputeFieldFeature
+SLF4J(W): No SLF4J providers were found.
+SLF4J(W): Defaulting to no-operation (NOP) logger implementation
+SLF4J(W): See https://www.slf4j.org/codes.html#noProviders for further details.
+Terminating due to java.lang.OutOfMemoryError: Java heap space
+The Native Image build process ran out of memory.
+Please make sure your build system has more memory available.
+
+> Task :nativeCompile FAILED
+```
+![img.png](docs/2img.png)
+
+
+### 해결방법
+build시 할당 메모리를 늘려줘봤지만, 직접적인 해결책은 아니었다.
+```shell
+./gradlew -Dorg.gradle.jvmargs="-Xmx7g -XX:MaxMetaspaceSize=1g" nativeCompile
+```
+
+해당 프로젝트 기준, 빌드시 메모리를 약 5GB 정도 사용하므로 이를 감안하여 다른 프로그램들을 꺼두면 좋다. (참고로 저는 인텔리제이를 끄고 터미널로 빌드해서 해결 ㅎㅎ..)
+![img_1.png](docs/2img_1.png)
+
+### 실행결과
+문제없이 JPA + PostgreSQL 조합의 영속성 데이터를 잘 가져와서 반환해주는 모습
+
+![img_2.png](docs/2img_2.png)
+
+
+<!-- ###################################################################################################################################### -->
+<!-- ###################################################################################################################################### -->
+<!-- ###################################################################################################################################### -->
+<br/>
+
+# 참고자료
 
 시작하기
 https://www.graalvm.org/latest/docs/getting-started/
