@@ -1,5 +1,5 @@
 # 그랄VM 예제
-- 언어: Java 22
+- 언어: Java 22 (Graal SDK)
 - 프레임워크: SpringBoot 3.2
 - Apple Silicon M2 Pro
 - 운영체제: MacOS 14.0(Sonoma 23A344)
