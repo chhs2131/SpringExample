@@ -1,0 +1,10 @@
+spring:
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
+    consumer:
+      bootstrap-servers: localhost:9092
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+    listener:
+      ack-mode: manual
